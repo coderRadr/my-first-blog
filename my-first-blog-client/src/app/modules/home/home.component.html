@@ -1,13 +1,20 @@
+<div *ngIf="showLoader">
+  <app-loader></app-loader>
+</div>
 <div>
   <div class="col-md-12">
-    <app-header></app-header>
+    <app-header [headerModels] = "headerModels" (componentName)="getComponentName($event)"></app-header>
   </div>
   <div>
     <div class="col-md-2">
       <app-left-panel></app-left-panel>
     </div>
     <div class="col-md-10">
-      <app-main></app-main>
+      <div *ngFor="let dt of headerModels" class="offset-md-1">
+        <div *ngIf="dt.isRendered && dt.code.includes('contact')">
+            <app-contact></app-contact>
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-md-12">

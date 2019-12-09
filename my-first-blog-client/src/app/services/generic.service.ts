@@ -17,7 +17,6 @@ export class GenericService {
         'Accept':'application/json',
         'trackingId': trackingId,
       });
-      console.log("headers:: "+ JSON.stringify(this.httpHeaders), trackingId);
   }
   
   public getHeaderDetails(): Observable<any> {
@@ -26,5 +25,13 @@ export class GenericService {
       headers: this.httpHeaders
     }
     return this.http.get('/details', options);
+  }
+
+  public contactDetails(): Observable<any> {
+    this.commonHeader();
+    const options = {
+      headers: this.httpHeaders
+    }
+    return this.http.get('/data/contact', options);
   }
 }

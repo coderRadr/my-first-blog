@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { GenericService } from 'src/app/services/generic.service';
+import { headerModel } from './headerModel';
 
 @Component({
   selector: 'app-header',
@@ -7,21 +8,14 @@ import { GenericService } from 'src/app/services/generic.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  private headerDetails: string[] = [];
-  private showLoader: boolean;
+  @Input() headerModels: headerModel[];
+  @Output() componentName = new EventEmitter<headerModel>();
   constructor(private headerService: GenericService) { }
 
   ngOnInit() {
-    this.showLoader = true;
-    this.headerService.getHeaderDetails().subscribe(res=>{
-      this.headerDetails.push(...res);
-      console.log("response from server:: "+ JSON.stringify(this.headerDetails));
-      this.showLoader=false;
-    })
   }
-  sendEvent(event){
-    console.log('event ', JSON.stringify(event));
+  sendEvent(componentToLoad: headerModel){
+    this.componentName.emit(componentToLoad);
   }
 
 }

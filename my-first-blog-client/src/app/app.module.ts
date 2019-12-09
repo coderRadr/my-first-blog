@@ -8,10 +8,11 @@ import { HomeComponent } from './modules/home/home.component';
 import { LeftPanelComponent } from './shared/left-panel/left-panel.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { MainComponent } from './shared/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './shared/loader/loader.component';
-import { ButtonModule } from '../../node_modules/primeng/button'
+import { ButtonModule } from '../../node_modules/primeng/button';
+import { CardModule } from '../../node_modules/primeng/card';
+import { ContactComponent } from './modules/pages/contact/contact.component'
 
 @NgModule({
   declarations: [
@@ -20,14 +21,15 @@ import { ButtonModule } from '../../node_modules/primeng/button'
     LeftPanelComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent,
     LoaderComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    CardModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue:'/'},

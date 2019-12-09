@@ -1,0 +1,13 @@
+<div *ngIf="showLoader">
+    <app-loader></app-loader>
+</div>
+<div *ngFor="let dt of developersInfo">
+    <span>
+        <p-card class="card">
+            <p-header class="col-md-12"><b><i>Name: </i></b>{{dt.name}}</p-header>
+            <div><b>Email: </b>{{dt.email}}</div>
+            <div><b>phoneNumber: </b>{{dt.phoneNumber}}</div>
+            <p-footer><b>skillset: </b>{{dt.skillset}}</p-footer>
+        </p-card>
+    </span>
+</div>

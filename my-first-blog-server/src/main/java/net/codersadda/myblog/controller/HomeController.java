@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import net.codersadda.myblog.entity.Model;
+
 @EnableWebMvc
 @Configuration
 @RestController
@@ -30,7 +32,6 @@ public class HomeController implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("File:: "+ ngPath);
 		registry.addResourceHandler("/viewContext/**").addResourceLocations(Paths.get(ngPath).toUri().toString()+"/my-first-blog-client/");
 	}
 
@@ -42,15 +43,15 @@ public class HomeController implements WebMvcConfigurer {
 	}
 	
 	@GetMapping("/details")
-	public List<String> getWebHeader(HttpServletRequest request, HttpServletResponse response) {
+	public List<Model> getWebHeader(HttpServletRequest request, HttpServletResponse response) {
 		log.info("starting Header details call: {}", request.getHeader("trackingId"));
-		List<String> details = new ArrayList<>();
-		details.add("Dashboard");
-		details.add("News");
-		details.add("Technology");
-		details.add("Entertainment");
-		details.add("Climate");
-		details.add("Contact Us");
+		List<Model> details = new ArrayList<Model>();
+		details.add(new Model("Dashboard", "dashboard"));
+		details.add(new Model("News", "news"));
+		details.add(new Model("Technology", "tech"));
+		details.add(new Model("Entertainment", "ent"));
+		details.add(new Model("Climate", "climate"));
+		details.add(new Model("Contact Us", "contact"));
 		return details;
 	}
 }
