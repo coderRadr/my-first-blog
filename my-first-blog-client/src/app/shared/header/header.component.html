@@ -1,0 +1,12 @@
+<div *ngIf="showLoader">
+    <app-loader></app-loader>
+</div>
+<div class="card headerStyle">
+    <h5 class="card-header">
+        <div class="col-md-11 offset-md-1">
+            <span *ngFor="let dt of headerDetails" class="offset-md-1">
+                <button pButton type="button" style="width: 130px; background-color: transparent !important; font-size: 17px; box-decoration-break: none;" class="ui-button-raised">{{dt}}</button>
+              </span>
+        </div>
+    </h5>
+  </div>
