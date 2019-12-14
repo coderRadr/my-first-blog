@@ -4,10 +4,15 @@
 <div *ngFor="let dt of developersInfo">
     <span>
         <p-card class="card">
-            <p-header class="col-md-12"><b><i>Name: </i></b>{{dt.name}}</p-header>
-            <div><b>Email: </b>{{dt.email}}</div>
-            <div><b>phoneNumber: </b>{{dt.phoneNumber}}</div>
-            <p-footer><b>skillset: </b>{{dt.skillset}}</p-footer>
+            <div class="col-md-12 align-middle">
+                <i class="fa fa-user-circle" style="font-size: 75px;"aria-hidden="true"></i>
+            </div>
+            <div class="col-md-12 align-left">
+                <p-header><b><i>Name: </i></b>{{dt.name}}</p-header>
+                <div><b>Email: </b>{{dt.email}}</div>
+                <div><b>phoneNumber: </b>{{dt.phoneNumber}}</div>
+                <p-footer><b>skillset: </b>{{dt.skillset}}</p-footer>
+            </div>
         </p-card>
     </span>
 </div>

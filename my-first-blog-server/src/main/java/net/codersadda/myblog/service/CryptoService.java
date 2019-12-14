@@ -11,6 +11,7 @@ import io.cryptocontrol.cryptonewsapi.models.Article;
 import io.cryptocontrol.cryptonewsapi.models.Tweet;
 import net.codersadda.myblog.entity.NewsResponse;
 import net.codersadda.myblog.entity.Sources;
+import net.codersadda.myblog.exception.RequestException;
 
 @Component
 public class CryptoService {
@@ -42,7 +43,7 @@ public class CryptoService {
 			
 			
 			public void onFailure(Exception e) {
-				throw new ExceptionHandler(e.getLocalizedMessage());
+				throw new RequestException(e.getLocalizedMessage());
 			}
 		});
 		
@@ -60,7 +61,7 @@ public class CryptoService {
 			
 			
 			@Override public void onFailure(Exception e) {
-				throw new ExceptionHandler(e.getLocalizedMessage());
+				throw new RequestException(e.getLocalizedMessage());
 			}
 		});
 		return responses;

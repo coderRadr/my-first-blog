@@ -19,6 +19,7 @@ public class WebSecurityConfig extends
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable();
+    http.headers().frameOptions().disable();
   }
   @Bean
   CorsConfigurationSource corsConfigurationSource() {

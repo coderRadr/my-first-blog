@@ -1,6 +1,13 @@
 package net.codersadda.myblog.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ContactDetails {
+	
+	@Id
+	private int id;
 	private String name;
 	private String email;
 	private String phoneNumber;
@@ -45,4 +52,9 @@ public class ContactDetails {
 		this.phoneNumber = phoneNumber;
 		this.skillset = skillset;
 	}
+
+	public ContactDetails() {
+		super();
+	}
+	
 }

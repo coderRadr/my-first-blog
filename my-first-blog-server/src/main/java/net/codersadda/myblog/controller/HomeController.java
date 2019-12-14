@@ -32,20 +32,22 @@ public class HomeController implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/viewContext/**").addResourceLocations(Paths.get(ngPath).toUri().toString()+"/my-first-blog-client/");
+		registry.addResourceHandler("/**").addResourceLocations(Paths.get(ngPath).toUri().toString()+"/my-first-blog-client/");
 	}
 
 	
 	@GetMapping({"/","/login"})
 	public void loadMainPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String baseUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
-		response.sendRedirect(baseUrl.concat("/viewContext/index.html"));
+		response.sendRedirect(baseUrl.concat("/index.html"));
 	}
 	
 	@GetMapping("/details")
 	public List<Model> getWebHeader(HttpServletRequest request, HttpServletResponse response) {
-		log.info("starting Header details call: {}", request.getHeader("trackingId"));
-		List<Model> details = new ArrayList<Model>();
+		List<Model> details = new ArrayList<>();
+		if(log.isDebugEnabled()) {
+			log.info("starting Header details call: {}", request.getHeader("trackingId"));
+		}
 		details.add(new Model("Dashboard", "dashboard"));
 		details.add(new Model("News", "news"));
 		details.add(new Model("Technology", "tech"));

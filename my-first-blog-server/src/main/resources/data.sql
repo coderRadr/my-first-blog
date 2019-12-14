@@ -1,0 +1,2 @@
+insert into CONTACT_DETAILS values (1,'mohankanuri@outlook.com','Mohan Kumar Kanuri','111-222-3333','Java 8, Spring, Spring boot, Angular, DRools');
+insert into CONTACT_DETAILS values (2,'ishtiaq@outlook.com','Ishtiaq','444-555-6666','Angular, Java 8, Spring, Spring boot, QA Lead');

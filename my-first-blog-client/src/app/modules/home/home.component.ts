@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   private showLoader: boolean;
   private headerModels: headerModel[] = [];
   componentToLoad: string;
+  errorFlag: boolean;
   constructor(private headerService: GenericService) { }
 
   ngOnInit() {
@@ -30,6 +31,10 @@ export class HomeComponent implements OnInit {
         src.isRendered = false;
       }
     });
+  }
+
+  showError(flag: boolean){
+    this.errorFlag = flag;
   }
 
 }

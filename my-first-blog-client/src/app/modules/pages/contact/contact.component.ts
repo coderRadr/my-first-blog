@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GenericService } from 'src/app/services/generic.service';
 import { contactDetails } from './contactDetails';
 
@@ -8,6 +8,7 @@ import { contactDetails } from './contactDetails';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  @Output() error = new EventEmitter<boolean>();
   showLoader: boolean;
   developersInfo: contactDetails[] = [];
 
@@ -18,7 +19,14 @@ export class ContactComponent implements OnInit {
     this.service.contactDetails().subscribe((res: contactDetails[])=>{
       this.developersInfo = res; 
       this.showLoader = false;
+    }, err=>{
+      this.sendErrorFlag(true);
+      this.showLoader=false;
     });
+  }
+
+  sendErrorFlag(flag: boolean){
+    this.error.emit(flag);
   }
 
 }
