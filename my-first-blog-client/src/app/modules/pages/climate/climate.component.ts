@@ -11,6 +11,7 @@ export class ClimateComponent implements OnInit {
   latitude: string;
   longitude: string;
   showLoader: boolean;
+  errorFlag: boolean;
   temperature: string;
   feelsLike: string;
   weatherCondition: string;
@@ -31,8 +32,11 @@ export class ClimateComponent implements OnInit {
         this.windSpeed = res.windspd_kmh;
         this.weatherCondition = res.wx_desc;
         this.stateName = res.cityName;
-        console.log(res);
         this.showLoader = false;
+        this.errorFlag = false;
+      }, err =>{
+        this.sendErrorFlag(true);
+        this.showLoader=false;  
       });
     },err=>{
       this.sendErrorFlag(true);
@@ -40,6 +44,8 @@ export class ClimateComponent implements OnInit {
     });
 
   }
-  sendErrorFlag(flag: boolean){this.error.emit(flag);}
+  sendErrorFlag(flag: boolean){
+    this.error.emit(flag);
+  }
 
 }
