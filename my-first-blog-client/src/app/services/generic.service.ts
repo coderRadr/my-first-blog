@@ -56,4 +56,10 @@ export class GenericService {
     return this.http.get('/weather/current/latitude/'+latitude+'/longitude/'+longitude, options);
   }
 
+  getNews(): Observable<any> {
+    this.commonHeader();
+    const options = {headers: this.httpHeaders}
+    return this.http.get('/data/cryptoNews', options);
+  }
+
 }

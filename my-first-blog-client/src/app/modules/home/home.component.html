@@ -3,7 +3,7 @@
 </div>
 <div>
   <div class="col-md-12">
-    <app-header [headerModels] = "headerModels" (componentName)="getComponentName($event)"></app-header>
+    <app-header [headerModels]="headerModels" (componentName)="getComponentName($event)"></app-header>
   </div>
   <div>
     <div class="col-md-2">
@@ -12,10 +12,13 @@
     <div class="col-md-10 mainContent">
       <div *ngFor="let dt of headerModels" class="offset-md-1">
         <div *ngIf="dt.isRendered && dt.code.includes('contact')">
-            <app-contact (error)="showError(true)"></app-contact>
+          <app-contact (error)="showError(true)"></app-contact>
         </div>
         <div *ngIf="dt.isRendered && dt.code.includes('climate')">
-            <app-climate (error)="showError(true)"></app-climate>
+          <app-climate (error)="showError(true)"></app-climate>
+        </div>
+        <div *ngIf="dt.isRendered && dt.code.includes('news')">
+          <app-news (error)="showError(true)"></app-news>
         </div>
       </div>
       <div *ngIf="errorFlag">

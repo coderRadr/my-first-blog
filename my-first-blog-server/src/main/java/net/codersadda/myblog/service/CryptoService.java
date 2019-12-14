@@ -3,6 +3,8 @@ package net.codersadda.myblog.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,8 @@ import net.codersadda.myblog.exception.RequestException;
 
 @Component
 public class CryptoService {
+	
+	private Logger log = LoggerFactory.getLogger(CryptoService.class);
 	
 	@Value("${crptonews.api.key}")
 	private String cryptoKey;
@@ -43,6 +47,7 @@ public class CryptoService {
 			
 			
 			public void onFailure(Exception e) {
+				log.error("Exception in getting top news in crypto:: "+ e.getLocalizedMessage());
 				throw new RequestException(e.getLocalizedMessage());
 			}
 		});
@@ -61,6 +66,7 @@ public class CryptoService {
 			
 			
 			@Override public void onFailure(Exception e) {
+				log.error("Exception in getting tweets info about crypto:: "+ e.getLocalizedMessage());
 				throw new RequestException(e.getLocalizedMessage());
 			}
 		});

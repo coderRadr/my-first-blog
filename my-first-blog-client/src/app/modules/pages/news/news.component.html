@@ -1,0 +1,18 @@
+<div *ngIf="showLoader">
+    <app-loader></app-loader>
+</div>
+<div *ngIf="!showLoader && !errorFlag">
+    <p-accordion>
+        <div *ngFor="let dt of category">{{dt.status}}
+        </div>
+        <div *ngFor="let source of sourcesToShow">
+            <p-accordionTab header="{{source.category}}">
+                <a [attr.href]="source.url" target="_blank" rel="noopener noreferrer" role="tab" data-toggle="tab">
+                    <h1><b>{{source.id}}</b></h1>
+                </a>
+                <p>{{source.name}}</p>
+            </p-accordionTab>
+        </div>
+        <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange) ="paginate($event)"></p-paginator>
+    </p-accordion>
+</div>
