@@ -8,7 +8,7 @@
         <div *ngFor="let source of sourcesToShow">
             <p-accordionTab header="{{source.category}}">
                 <a [attr.href]="source.url" target="_blank" rel="noopener noreferrer" role="tab" data-toggle="tab">
-                    <h1><b>{{source.id}}</b></h1>
+                    <h3><b>{{source.id}}</b></h3>
                 </a>
                 <p>{{source.name}}</p>
             </p-accordionTab>
