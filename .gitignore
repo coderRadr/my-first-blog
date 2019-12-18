@@ -1,0 +1,5 @@
+my-first-blog-server/data/tables.mv.db
+my-first-blog-server/data/tables.trace.db
+my-first-blog-server/logs/LogFile.log
+my-first-blog-server/logs/archived/spring-boot-logger-2019-12-15.0.log
+my-first-blog-server/logs/archived/spring-boot-logger-2019-12-16.0.log
