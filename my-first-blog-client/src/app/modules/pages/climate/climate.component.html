@@ -1,13 +1,35 @@
 <div *ngIf="showLoader">
     <app-loader></app-loader>
 </div>
-<div *ngIf="!showLoader && !errorFlag" class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-12 col-md-offset-4">
-            <div class="weather">
+            <div class="col-md-12 col-md-offset-4">
+                <span>
+                    <label for="countries list">Select the Country</label>
+                    <select id = "countries list" name="countries list" [ngModel]="selectedCountry"
+                        (ngModelChange)="onCountrySelection($event)">
+                        <option value="" selected="selected" hidden="hidden">Select Country</option>
+                        <option *ngFor="let cName of countryNames" value="{{cName}}">
+                            {{cName}}
+                        </option>
+                    </select>
+                </span>
+                <span class="col-md-offset-2">
+                    <label for="Cities list">Select the City</label>
+                    <select id="Cities list" name="Cities list" [ngModel]="selectedCityName" (ngModelChange)="onCityChange($event)">
+                        <option value="" selected="selected" hidden="hidden">Select City</option>
+                        <option *ngFor="let cName of cityNames" value="{{cName}}">
+                            {{cName}}
+                        </option>
+                    </select>
+                </span>
+            </div>
+            <div *ngIf="!errorFlag" class="weather">
                 <div class="current">
                     <div class="info">
                         <div>&nbsp;</div>
+                        <div class="country">Country: {{selectedCountry}}</div>
                         <div class="city"><small><small>STATE:</small></small> {{stateName}}</div>
                         <div class="temp">{{temperature}}&deg; <small>F</small></div>
                         <div class="condition">{{weatherCondition}}</div>

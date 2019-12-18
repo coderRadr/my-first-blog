@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { cityList } from '../modules/pages/climate/cityList';
+/* import * from '../../assets/city.list.json' */
 
 @Injectable({
   providedIn: 'root'
@@ -35,25 +37,15 @@ export class GenericService {
     return this.http.get('/data/contact', options);
   }
 
-  public getGeoLocation(): Promise<any>
+  public getGeoLocation(): Observable<any>
   {
-    return new Promise((resolve, reject) => {
-
-      navigator.geolocation.getCurrentPosition(resp => {
-
-          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
-        },
-        err => {
-          reject(err);
-        });
-    });
-
+    return this.http.get('../../assets/cityList.json');
   }
 
-  getClimateDetails(latitude: string, longitude: string): Observable<any> {
+  getClimateDetails(latitude: string, longitude: string, cityName: string): Observable<any> {
     this.commonHeader();
     const options = {headers: this.httpHeaders}
-    return this.http.get('/weather/current/latitude/'+latitude+'/longitude/'+longitude, options);
+    return this.http.get('/weather/current/latitude/'+latitude+'/longitude/'+longitude+'/cityName/'+cityName, options);
   }
 
   getNews(): Observable<any> {

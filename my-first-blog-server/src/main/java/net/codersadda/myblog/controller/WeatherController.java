@@ -24,10 +24,10 @@ public class WeatherController {
 	private WeatherService service;
 	
 	@ApiOperation(value = "Get current location weather", response = CurrentWeatherEntity.class)
-	@GetMapping(path="/current/latitude/{latitute}/longitude/{longitude}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public CurrentWeatherEntity currentWeather(@PathVariable(value = "latitute") double latitute, @PathVariable(value = "longitude") double longitude) throws JsonMappingException, JsonProcessingException {
+	@GetMapping(path="/current/latitude/{latitute}/longitude/{longitude}/cityName/{cityName}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public CurrentWeatherEntity currentWeather(@PathVariable(value = "latitute") double latitute, @PathVariable(value = "longitude") double longitude, @PathVariable(value = "cityName") String cityName) throws JsonMappingException, JsonProcessingException {
 		CurrentWeatherEntity response = service.currentWeather(latitute, longitude);
-		response.setCityName(service.getLocationName(latitute, longitude));
+		response.setCityName(cityName);
 		return response;
 	}
 
