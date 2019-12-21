@@ -38,14 +38,18 @@ export class ClimateComponent implements OnInit {
       if(!this.countryNames.includes(res.country) && res.country !== "")
       this.countryNames.push(res.country);
     });
+    console.log('country names:: '+ this.countryNames);
     this.showLoader = false;
   }
 
   onCountrySelection(event){
     this.showLoader = true;
     this.selectedCountry = event;
-    this.citiesJson.filter(src=> src.country === event).forEach(src=>{
-      this.cityNames.push(src.name);
+    this.cityNames = [];
+    this.selectedCityName = "";
+    var index = this.citiesJson.findIndex(src => src.country === this.selectedCountry);
+    this.citiesJson[index].cities.forEach(src=>{
+      this.cityNames.push(src.cityName);
     })
     this.showLoader = false;
   }
@@ -53,21 +57,34 @@ export class ClimateComponent implements OnInit {
   onCityChange(event){
     this.showLoader = true;
     this.selectedCityName = event;
-    this.citiesJson.filter(src=> src.country=== this.selectedCountry && src.name === this.selectedCityName).forEach(src=>{
-      this.latitude = src.coord.lat;
-      this.longitude = src.coord.lon;
-    });
-    this.service.getClimateDetails(this.latitude, this.longitude, this.selectedCityName).subscribe(res=>{
-      this.stateName = res.cityName;
-      this.temperature = res.temp_f;
-      this.weatherCondition = res.wx_desc;
-      this.windSpeed = res.windspd_kmh;
-      console.log(res);
-    }, err=>{
+    var index = this.citiesJson.findIndex(src => src.country === this.selectedCountry);
+    if(index != -1){
+      var cityIndex = this.citiesJson[index].cities.findIndex(src => src.cityName === this.selectedCityName);
+      if(cityIndex != -1){
+        this.latitude = this.citiesJson[index].cities[cityIndex].latitude;
+        this.longitude = this.citiesJson[index].cities[cityIndex].longitude;
+        this.service.getClimateDetails(this.latitude, this.longitude, this.selectedCityName).subscribe(res=>{
+          this.stateName = res.cityName;
+          this.temperature = res.temp_f;
+          this.weatherCondition = res.wx_desc;
+          this.windSpeed = res.windspd_kmh;
+          console.log(res);
+          this.showLoader = false;
+        }, err=>{
+          this.errorFlag = true;
+          this.sendErrorFlag(this.errorFlag);
+          this.showLoader = false;
+        });
+      }else{
+        this.showLoader = false;
+        this.errorFlag = true;
+        this.sendErrorFlag(this.errorFlag);
+      }
+    }else{
+      this.showLoader = false;
       this.errorFlag = true;
       this.sendErrorFlag(this.errorFlag);
-    });
-    this.showLoader = false;
+    }
   }
   sendErrorFlag(flag: boolean){
     this.error.emit(flag);

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { cityList } from '../modules/pages/climate/cityList';
-/* import * from '../../assets/city.list.json' */
 
 @Injectable({
   providedIn: 'root'
